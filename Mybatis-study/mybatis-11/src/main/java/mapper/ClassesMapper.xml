@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.ClassesMapper">
+    <select id="getClassesByid" parameterType="int" resultMap="getClassesStudent">
+        select * from mybatis1.class c,mybatis1.student s where c.c_id = s.class_id and c.c_id=#{id}
+    </select>
+    <resultMap id="getClassesStudent" type="Classes">
+        <id property="id" column="c_id"/>
+        <result property="name" column="c_name"/>
+        <collection property="students" ofType="Student">
+            <id property="id" column="s_id"/>
+            <result property="name" column="s_name"/>
+        </collection>
+    </resultMap>
+
+    <select id="getClassAll" parameterType="int" resultMap="getAllClassesStudent">
+        select * from mybatis1.class c,mybatis1.student s where c.c_id = s.class_id
+    </select>
+    <resultMap id="getAllClassesStudent" type="Classes">
+        <id property="id" column="c_id"/>
+        <result property="name" column="c_name"/>
+        <collection property="students" ofType="Student">
+            <id property="id" column="s_id"/>
+            <result property="name" column="s_name"/>
+        </collection>
+    </resultMap>
+
+<!--    <update id="">-->
+<!--        update mybatis1.student set s_name=111 where s_id=#{id}-->
+<!--    </update>-->
+<!--    <insert id="">-->
+<!--        insert into mybatis1.student values ()-->
+<!--    </insert>-->
+</mapper>

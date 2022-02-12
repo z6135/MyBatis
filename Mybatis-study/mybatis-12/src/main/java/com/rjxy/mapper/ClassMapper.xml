@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rjxy.mapper.ClassMapper">
+    <select id="getAllClass" resultMap="ClassTeacher">
+        select  * from mybatis1.class c,mybatis1.teacher t,mybatis1.student s where c.teacher_id = t.t_id and c.c_id = s.class_id
+    </select>
+    <resultMap id="ClassTeacher" type="Classes">
+        <id property="id" column="c_id"/>
+        <result property="name" column="c_name"/>
+        <association property="teacher" javaType="Teacher">
+            <id property="id" column="t_id"/>
+            <result property="name" column="t_name"/>
+        </association>
+        <collection property="students" ofType="Student">
+            <id property="id" column="s_id"/>
+            <result property="name" column="s_name"/>
+        </collection>
+    </resultMap>
+</mapper>

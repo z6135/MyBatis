@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--configuration核心环境-->
+<configuration>
+<!--    引入外部配置文件-->
+    <properties resource="db.properties"/>
+    <settings>
+        <setting name="logImpl" value="LOG4J"/>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+    <typeAliases>
+        <package name="com.sxau.pojo"/>
+    </typeAliases>
+    <typeHandlers>
+        <typeHandler handler="org.apache.ibatis.type.BigDecimalTypeHandler" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
+        <typeHandler handler="org.apache.ibatis.type.DateOnlyTypeHandler" javaType="java.util.Date" jdbcType="DATE"/>
+    </typeHandlers>
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+<!--                数据库8.0以上useSSL=false-->
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <mapper class="com.sxau.dao.bill.BillMapper"/>
+        <mapper class="com.sxau.dao.provider.ProviderMapper"/>
+        <mapper class="com.sxau.dao.role.RoleMapper"/>
+        <mapper class="com.sxau.dao.user.UserMapper"/>
+    </mappers>
+</configuration>

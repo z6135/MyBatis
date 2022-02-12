@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxau1.dao.provider.ProviderMapper">
+<!--    增加用户信息-->
+    <insert id="add" parameterType="Provider">
+        insert into smbsm.smbms_provider(proCode, proName, proDesc, proContact, proPhone, proAddress,proFax, createdBy, creationDate, modifyDate, modifyBy) VALUES (#{proCode}, #{proName}, #{proDesc}, #{proContact}, #{proPhone}, #{proAddress},#{proFax}, #{createdBy}, #{creationDate}, #{modifyDate}, #{modifyBy})
+    </insert>
+<!--    通过条件查询providerList-->
+    <select id="getProviderList" resultType="Provider">
+        select * from smbsm.smbms_provider
+        WHERE
+        <if test="proName != null">
+            proName like concat('%','${proName}','%')
+        </if>
+        <if test="proCode != null">
+            AND proCode like concat('%','${proCode}','%')
+        </if>
+    </select>
+</mapper>
